@@ -763,7 +763,7 @@ function MovePicker(hashMove, depth, killer1, killer2) {
             }
 
             if (this.stage == 7)
-                return 0;
+                //pass
         }
 
         var bestMove = this.atMove;
