@@ -762,10 +762,6 @@ function MovePicker(hashMove, depth, killer1, killer2) {
                 if (this.atMove == this.moveCount) this.stage++;
             }
 
-            if (this.stage == 7)
-                //pass
-        }
-
         var bestMove = this.atMove;
         for (var j = this.atMove + 1; j < this.moveCount; j++) {
             if (this.moveScores[j] > this.moveScores[bestMove]) {
