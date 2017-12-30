@@ -1,6 +1,6 @@
 "use strict";
+//asdasdasdasd
 
-//asd
 // Perf TODO:
 // Merge material updating with psq values
 // Put move scoring inline in generator
@@ -551,12 +551,15 @@ function QSearch(alpha, beta, ply) {
     }
 
     /* Disable checks...  Too slow currently
+
     if (ply == 0 && !wasInCheck) {
         moves = new Array();
         GenerateAllMoves(moves);
+
         for (var i = 0; i < moves.length; i++) {
             moveScores[i] = ScoreMove(moves[i]);
         }
+
         for (var i = 0; i < moves.length; i++) {
             var bestMove = i;
             for (var j = moves.length - 1; j > i; j--) {
@@ -568,29 +571,39 @@ function QSearch(alpha, beta, ply) {
                 var tmpMove = moves[i];
                 moves[i] = moves[bestMove];
                 moves[bestMove] = tmpMove;
+
                 var tmpScore = moveScores[i];
                 moveScores[i] = moveScores[bestMove];
                 moveScores[bestMove] = tmpScore;
             }
+
             if (!MakeMove(moves[i])) {
                 continue;
             }
             var checking = g_inCheck;
             UnmakeMove(moves[i]);
+
             if (!checking) {
                 continue;
             }
+
             if (!See(moves[i])) {
                 continue;
             }
+
             MakeMove(moves[i]);
+
             var value = -QSearch(-beta, -alpha, ply - 1);
+
             UnmakeMove(moves[i]);
+
             if (value > realEval) {
                 if (value >= beta)
                     return value;
+
                 if (value > alpha)
                     alpha = value;
+
                 realEval = value;
             }
         }
@@ -762,6 +775,10 @@ function MovePicker(hashMove, depth, killer1, killer2) {
                 if (this.atMove == this.moveCount) this.stage++;
             }
 
+            if (this.stage == 10)
+                return 0;
+        }
+
         var bestMove = this.atMove;
         for (var j = this.atMove + 1; j < this.moveCount; j++) {
             if (this.moveScores[j] > this.moveScores[bestMove]) {
@@ -927,6 +944,7 @@ function AllCutNode(ply, depth, beta, allowNull) {
                     UnmakeMove(currentMove);
                     continue;
                 }
+
                 if (ply < 7) {
                     var reducedPly = reduced <= 0 ? 0 : reduced;
                     var futilityValue = -g_baseEval + (900 * (reducedPly + 2)) - (movePicker.atMove * 10);
